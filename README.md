@@ -85,16 +85,16 @@ fun_fact: "I debug with print statements and I'm not ashamed 😄"
 <div align="center">
 
 <a href="https://github.com/Vaibhav0710/Voting_System">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Vaibhav0710&repo=Voting_System&theme=github_dark&border_color=30363d&bg_color=0d1117&title_color=58a6ff&icon_color=8b949e&text_color=c9d1d9" />
+  <img src="https://github-readme-stats-sigma-five.vercel.app/api/pin/?username=Vaibhav0710&repo=Voting_System&theme=github_dark&border_color=30363d&bg_color=0d1117&title_color=58a6ff&icon_color=8b949e&text_color=c9d1d9" />
 </a>
 <a href="https://github.com/Vaibhav0710/Courier-management-system">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Vaibhav0710&repo=Courier-management-system&theme=github_dark&border_color=30363d&bg_color=0d1117&title_color=58a6ff&icon_color=8b949e&text_color=c9d1d9" />
+  <img src="https://github-readme-stats-sigma-five.vercel.app/api/pin/?username=Vaibhav0710&repo=Courier-management-system&theme=github_dark&border_color=30363d&bg_color=0d1117&title_color=58a6ff&icon_color=8b949e&text_color=c9d1d9" />
 </a>
 <a href="https://github.com/Vaibhav0710/Voting_User_Service">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Vaibhav0710&repo=Voting_User_Service&theme=github_dark&border_color=30363d&bg_color=0d1117&title_color=58a6ff&icon_color=8b949e&text_color=c9d1d9" />
+  <img src="https://github-readme-stats-sigma-five.vercel.app/api/pin/?username=Vaibhav0710&repo=Voting_User_Service&theme=github_dark&border_color=30363d&bg_color=0d1117&title_color=58a6ff&icon_color=8b949e&text_color=c9d1d9" />
 </a>
 <a href="https://github.com/Vaibhav0710/Voting_Candidate_Service">
-  <img src="https://github-readme-stats.vercel.app/api/pin/?username=Vaibhav0710&repo=Voting_Candidate_Service&theme=github_dark&border_color=30363d&bg_color=0d1117&title_color=58a6ff&icon_color=8b949e&text_color=c9d1d9" />
+  <img src="https://github-readme-stats-sigma-five.vercel.app/api/pin/?username=Vaibhav0710&repo=Voting_Candidate_Service&theme=github_dark&border_color=30363d&bg_color=0d1117&title_color=58a6ff&icon_color=8b949e&text_color=c9d1d9" />
 </a>
 
 </div>
@@ -140,8 +140,8 @@ fun_fact: "I debug with print statements and I'm not ashamed 😄"
 
 <div align="center">
 
-<img height="180em" src="https://github-readme-stats.vercel.app/api?username=Vaibhav0710&show_icons=true&theme=github_dark&bg_color=0d1117&border_color=30363d&title_color=58a6ff&icon_color=58a6ff&text_color=c9d1d9&hide_border=false&count_private=true&include_all_commits=true" />
-<img height="180em" src="https://github-readme-stats.vercel.app/api/top-langs/?username=Vaibhav0710&layout=compact&theme=github_dark&bg_color=0d1117&border_color=30363d&title_color=58a6ff&text_color=c9d1d9&hide_border=false&langs_count=8" />
+<img height="180em" src="https://github-readme-stats-sigma-five.vercel.app/api?username=Vaibhav0710&show_icons=true&theme=github_dark&bg_color=0d1117&border_color=30363d&title_color=58a6ff&icon_color=58a6ff&text_color=c9d1d9&hide_border=false&count_private=true&include_all_commits=true" />
+<img height="180em" src="https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=Vaibhav0710&layout=compact&theme=github_dark&bg_color=0d1117&border_color=30363d&title_color=58a6ff&text_color=c9d1d9&hide_border=false&langs_count=8" />
 
 </div>
 
@@ -149,17 +149,6 @@ fun_fact: "I debug with print statements and I'm not ashamed 😄"
 
 <!-- GitHub Streak -->
 <img src="https://github-readme-streak-stats.herokuapp.com/?user=Vaibhav0710&theme=github-dark-blue&background=0d1117&border=30363d&stroke=58a6ff&ring=58a6ff&fire=e3b341&currStreakLabel=58a6ff&sideLabels=8b949e&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e" alt="GitHub Streak" />
-
-</div>
-
----
-
-<!-- Trophies -->
-## 🏆 &nbsp;GitHub Trophies
-
-<div align="center">
-
-[![trophy](https://github-profile-trophy.vercel.app/?username=Vaibhav0710&theme=darkhub&no-frame=true&no-bg=true&column=7&margin-w=15&margin-h=15)](https://github.com/ryo-ma/github-profile-trophy)
 
 </div>
 
