@@ -192,6 +192,17 @@ fun_fact: "I debug with print statements and I'm not ashamed 😄"
 
 ---
 
+<!-- Trophies -->
+## 🏆 &nbsp;GitHub Trophies
+
+<div align="center">
+
+[![trophy](https://github-profile-trophy.vercel.app/?username=Vaibhav0710&theme=darkhub&no-frame=true&no-bg=true&column=7&margin-w=15&margin-h=15)](https://github.com/ryo-ma/github-profile-trophy)
+
+</div>
+
+---
+
 <div align="center">
 
 ### 💡 *"Clean code always looks like it was written by someone who cares."*
