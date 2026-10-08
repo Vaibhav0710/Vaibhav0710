@@ -140,7 +140,7 @@ String newHash = hashingService.generateHash(
 <td width="50%" valign="top">
 
 ### 🌐 [Portfolio](https://github.com/Vaibhav0710/Portfolio)
-My personal site, with GSAP scroll animations and Lenis smooth scrolling.
+My personal site, with GSAP scroll animations, Lenis smooth scrolling and a working contact form.
 <br/><sub>`Next.js 16` `React 19` `Tailwind v4` `TypeScript` `GSAP`</sub>
 <br/>[**→ Live site**](https://vaibhavjain-portfolio.vercel.app/)
 
@@ -148,8 +148,8 @@ My personal site, with GSAP scroll animations and Lenis smooth scrolling.
 <td width="50%" valign="top">
 
 ### 📦 [Courier Management System](https://github.com/Vaibhav0710/Courier-management-system)
-A full-stack delivery platform with separate Admin, Customer and Delivery-Partner portals, secured with JWT.
-<br/><sub>`Spring Boot 3.4` `Java 21` `React 19` `MUI` `MySQL`</sub>
+A full-stack delivery platform with separate Admin, Customer and Delivery-Partner portals, JWT login, Swagger API docs and a contact form.
+<br/><sub>`Spring Boot 3.4` `Java 21` `Spring Security` `React 19` `MUI` `MySQL`</sub>
 
 </td>
 </tr>
@@ -157,10 +157,19 @@ A full-stack delivery platform with separate Admin, Customer and Delivery-Partne
 <td width="50%" valign="top">
 
 ### 🚗 [Rent-A-Car](https://github.com/Vaibhav0710/Rent_A_Car)
-A car-rental system with layered DAO and service classes, plus admin and customer flows.
-<br/><sub>`Core Java` `JDBC` `MySQL` `Maven`</sub>
+A car-rental system with entity, DAO and service layers. Admins manage the fleet and bookings; customers register and book.
+<br/><sub>`Java 17` `JDBC` `MySQL` `Maven`</sub>
 
 </td>
+<td width="50%" valign="top">
+
+### 👥 [User Management REST API](https://github.com/Vaibhav0710/Backend-Developer-Intern-Assignment-Submission-Details)
+A backend internship assignment: a CRUD API with routes, controllers and config kept apart, plus input validation and error handling.
+<br/><sub>`Node.js` `Express` `MySQL`</sub>
+
+</td>
+</tr>
+<tr>
 <td width="50%" valign="top">
 
 ### 🍕 [Pizza Shop](https://github.com/Vaibhav0710/Pizza-Shop)
@@ -168,8 +177,6 @@ A console ordering system with login, a categorised menu, a cart and an admin vi
 <br/><sub>`Core Java` `JDBC` `MySQL`</sub>
 
 </td>
-</tr>
-<tr>
 <td width="50%" valign="top">
 
 ### 🌱 [Autonomous Farming Robot](https://github.com/Vaibhav0710/DesignDevelopmentOfAutonomousFarmingWithPlanthealthIndicationSystem)
@@ -177,15 +184,21 @@ My final-year engineering project: an IoT robot that monitors crop health and de
 <br/><sub>`ESP32` `Arduino` `OpenCV` `Python` `IoT sensors`</sub>
 
 </td>
-<td width="50%" valign="top">
-
-### 🎬 [Movie Finder](https://github.com/Vaibhav0710/Movie-Finder)
-A responsive app for searching movies through the OMDB API, built with React hooks.
-<br/><sub>`React` `JavaScript` `OMDB API`</sub>
-
-</td>
 </tr>
 </table>
+
+<details>
+<summary><b>🎮 &nbsp;Games and early builds</b> (click to expand)</summary>
+<br/>
+
+| Project | What it is | Stack |
+|:--|:--|:--|
+| 🧩 [Sudoku](https://github.com/Vaibhav0710/Sudoku_Game) | A desktop Sudoku with a puzzle generator, saved progress, and separate domain, persistence and UI layers | `Java` `JavaFX` |
+| ❓ [Quiz Game](https://github.com/Vaibhav0710/Quiz_game) | A desktop quiz with login, a rules screen and a final score | `Java` `Swing` |
+| 🎬 [Movie Finder](https://github.com/Vaibhav0710/Movie-Finder) | Search movies and view details from the OMDB API | `React` `JavaScript` |
+| ✅ [Todo App](https://github.com/Vaibhav0710/todo_app) | My first Flutter app: add, complete, delete and search todos | `Flutter` `Dart` |
+
+</details>
 
 ---
 
