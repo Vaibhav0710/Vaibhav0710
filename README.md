@@ -194,9 +194,7 @@ My final-year engineering project: an IoT robot that monitors crop health and de
 | Project | What it is | Stack |
 |:--|:--|:--|
 | 🧩 [Sudoku](https://github.com/Vaibhav0710/Sudoku_Game) | A desktop Sudoku with a puzzle generator, saved progress, and separate domain, persistence and UI layers | `Java` `JavaFX` |
-| ❓ [Quiz Game](https://github.com/Vaibhav0710/Quiz_game) | A desktop quiz with login, a rules screen and a final score | `Java` `Swing` |
 | 🎬 [Movie Finder](https://github.com/Vaibhav0710/Movie-Finder) | Search movies and view details from the OMDB API | `React` `JavaScript` |
-| ✅ [Todo App](https://github.com/Vaibhav0710/todo_app) | My first Flutter app: add, complete, delete and search todos | `Flutter` `Dart` |
 
 </details>
 
