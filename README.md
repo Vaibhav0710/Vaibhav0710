@@ -1,15 +1,15 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:58a6ff&height=220&section=header&text=Vaibhav%20Jain&fontSize=60&fontColor=58a6ff&fontAlignY=35&desc=Backend%20Engineer%20%E2%80%A2%20Java%20%E2%80%A2%20Spring%20Boot%20%E2%80%A2%20Event-Driven%20Systems&descSize=18&descColor=8b949e&descAlignY=55&animation=fadeIn" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:58a6ff&height=220&section=header&text=Vaibhav%20Jain&fontSize=60&fontColor=58a6ff&fontAlignY=35&desc=Backend%20Developer%20%E2%80%A2%20Booking%20%26%20Scheduling%20APIs%20%E2%80%A2%20Google%20Cloud&descSize=18&descColor=8b949e&descAlignY=55&animation=fadeIn" width="100%"/>
 
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&duration=3000&pause=1000&color=58A6FF&center=true&vCenter=true&repeat=true&width=650&height=40&lines=Building+backends+that+don't+fall+over;Kafka+%E2%80%A2+Redis+%E2%80%A2+Spring+Cloud+%E2%80%A2+PostgreSQL;Every+vote+SHA-256+chained+to+the+last+one;Mechanical+engineer+turned+backend+engineer" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&duration=3000&pause=1000&color=58A6FF&center=true&vCenter=true&repeat=true&width=650&height=40&lines=Booking+%26+scheduling+APIs+on+Google+Cloud;Python+%E2%80%A2+Node.js+%E2%80%A2+C%23%2F.NET+at+work;Java+%E2%80%A2+Spring+Boot+%E2%80%A2+Kafka+in+projects;Every+vote+SHA-256+chained+to+the+last+one;Mechanical+engineer+turned+backend+developer" alt="Typing SVG" /></a>
 
 <br/>
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-0d1117?style=for-the-badge&logo=vercel&logoColor=58a6ff)](https://vaibhavjain-portfolio.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=58a6ff)](https://www.linkedin.com/in/-vaibhavjain/)
-[![Resume](https://img.shields.io/badge/Resume-0d1117?style=for-the-badge&logo=googledrive&logoColor=58a6ff)](https://drive.google.com/file/d/1UZ2y_ER-wKaBP7KIc2PIHicbERs4zSWQ/view?usp=sharing)
-[![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=58a6ff)](mailto:vaibhavjain7171@gmail.com)
+[![Resume](https://img.shields.io/badge/Resume-0d1117?style=for-the-badge&logo=adobeacrobatreader&logoColor=58a6ff)](https://vaibhavjain-portfolio.vercel.app/Vaibhav_Jain_Java_Backend_Developer_CV.pdf)
+[![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=58a6ff)](mailto:vaibhav.jain.careers@gmail.com)
 [![Profile Views](https://komarev.com/ghpvc/?username=Vaibhav0710&style=for-the-badge&color=58a6ff&labelColor=0d1117&label=VIEWS)](https://github.com/Vaibhav0710)
 
 </div>
@@ -20,15 +20,18 @@
 
 ```java
 @Service
-public class VaibhavJain implements BackendEngineer {
+public class VaibhavJain implements BackendDeveloper {
 
-    private final String role     = "Junior Software Developer @ IntelligentDX";
-    private final String location = "Pune, India 🇮🇳";
-    private final String[] stack  = { "Java", "Spring Boot", "Kafka", "Redis", "PostgreSQL", "GCP Pub/Sub" };
+    private final String role       = "Junior Software Developer @ IntelligentDX"; // healthtech software for eye-care practices
+    private final String location   = "Pune, India 🇮🇳";
+    private final String experience = "1.5 years: intern from Apr 2025, full-time since Nov 2025";
+
+    private final String[] workStack    = { "Python (Flask)", "Node.js (Express)", "C#/.NET", "PostgreSQL", "Redis", "BigQuery", "Google Cloud" };
+    private final String[] projectStack = { "Java", "Spring Boot", "Spring Cloud", "Kafka" };
 
     @Override
     public String atWork() {
-        return "Redis caching that cut request latency by 40%, and a move from a monolith to events on Pub/Sub + Kafka";
+        return "Booking and scheduling APIs on Google Cloud, from treatment-plan booking to Cloud Run sync jobs";
     }
 
     @Override
@@ -38,7 +41,7 @@ public class VaibhavJain implements BackendEngineer {
 
     @Override
     public String origin() {
-        return "B.E. Mechanical → PG-DAC @ Sunbeam Pune → CS50x & CS50P (Harvard)";
+        return "B.E. Mechanical (MESCOE Pune, 2019–2023) → PG-DAC (C-DAC) at Sunbeam Pune";
     }
 }
 ```
@@ -47,18 +50,20 @@ public class VaibhavJain implements BackendEngineer {
 
 ## ⚙️ &nbsp;Work highlights
 
-| | What I shipped at **IntelligentDX** |
+| | At **IntelligentDX** · healthtech software for eye-care practices |
 |:-:|:--|
-| ⚡ | Built an appointment-rescheduling API that handles **12,000+ transactions a month** with a **99.9%** success rate |
-| 🧠 | Designed a **Redis** caching layer that cut end-to-end request latency by **40%** |
-| 📦 | Led the migration of **4,000+ business rules** from legacy storage to a central, high-availability Redis instance |
-| 🔀 | Moved monolithic processing to an **event-driven** design on **GCP Pub/Sub** and **Kafka** |
+| 📅 | Built a **treatment-plan booking API** that books every visit of a multi-appointment plan across up to **15 parallel lanes**, with atomic slot reservation, one audit row per appointment and 200/207/422 responses. In production since **September 2026**. |
+| 🔁 | Built **cancel and reschedule APIs** on an EHR with no native reschedule: book the new slot first, retry at timed offsets, return **HTTP 207** on partial success, full audit trail. |
+| ⏱️ | Designed **background sync** (Cloud Scheduler → Cloud Run Jobs → PostgreSQL) for **213 providers × 111 locations × 70 visit types**, replacing slow or timing-out external calls with indexed database reads. |
+| ⚡ | Cut the **slot-search API** from about **2.7–3.6 s to 1.7–2.5 s** with a concurrent pager, and moved scheduling APIs to an EHR's **FHIR R4** API with unchanged API contracts. |
+| 🤖 | Designed an **AI rule-generation platform** around Claude with validation gates and a repair loop; prompt caching cut cost per generated rule by about **27–31%**. |
+| 🧳 | *Internship:* migrated **10 API read paths** across **5 C#/.NET microservices** from MongoDB to PostgreSQL in about **8 weeks**; 9 reached production with identical responses. |
 
 ---
 
 ## 🗳️ &nbsp;Flagship project: Blockchain-Inspired Voting System
 
-> An online election platform where **no single service can quietly change a result**. Each vote stores the SHA-256 hash of the vote before it, so editing or deleting any row breaks the chain, and anyone can verify it through a public endpoint.
+> An online election platform built so that **tampering with stored votes is detectable**. Each vote stores the SHA-256 hash of the vote before it, so editing or deleting any row breaks the chain, and a verification endpoint can find the break.
 
 ```mermaid
 flowchart LR
@@ -99,7 +104,7 @@ String newHash = hashingService.generateHash(
         + timestampSeconds + prevHash);
 ```
 
-`POST /api/v1/votes/chain/validate/{electionId}` recomputes every hash in the election and reports how many links are broken.
+`POST /api/v1/votes/chain/validate/{electionId}` (admin only) recomputes every hash in the election and reports how many links are broken.
 
 </td>
 <td width="50%" valign="top">
@@ -140,16 +145,16 @@ String newHash = hashingService.generateHash(
 <td width="50%" valign="top">
 
 ### 🌐 [Portfolio](https://github.com/Vaibhav0710/Portfolio)
-My personal site, with GSAP scroll animations, Lenis smooth scrolling and a working contact form.
-<br/><sub>`Next.js 16` `React 19` `Tailwind v4` `TypeScript` `GSAP`</sub>
+My personal portfolio site, deployed on Vercel.
+<br/><sub>`Next.js` `TypeScript` `Tailwind` `Vercel`</sub>
 <br/>[**→ Live site**](https://vaibhavjain-portfolio.vercel.app/)
 
 </td>
 <td width="50%" valign="top">
 
 ### 📦 [Courier Management System](https://github.com/Vaibhav0710/Courier-management-system)
-A full-stack delivery platform with separate Admin, Customer and Delivery-Partner portals, JWT login, Swagger API docs and a contact form.
-<br/><sub>`Spring Boot 3.4` `Java 21` `Spring Security` `React 19` `MUI` `MySQL`</sub>
+A full-stack delivery platform with separate Admin, Customer and Delivery-Partner modules, JWT login, OpenAPI docs and a contact form.
+<br/><sub>`Java 21` `Spring Boot 3.4` `Spring Data JPA` `Spring Security + JWT` `springdoc OpenAPI` `MySQL` `React`</sub>
 
 </td>
 </tr>
@@ -157,14 +162,14 @@ A full-stack delivery platform with separate Admin, Customer and Delivery-Partne
 <td width="50%" valign="top">
 
 ### 🚗 [Rent-A-Car](https://github.com/Vaibhav0710/Rent_A_Car)
-A car-rental system with entity, DAO and service layers. Admins manage the fleet and bookings; customers register and book.
+A console car-rental system with entity, DAO and service layers. Admins manage the fleet and bookings; customers register and book.
 <br/><sub>`Java 17` `JDBC` `MySQL` `Maven`</sub>
 
 </td>
 <td width="50%" valign="top">
 
 ### 👥 [User Management REST API](https://github.com/Vaibhav0710/Backend-Developer-Intern-Assignment-Submission-Details)
-A backend internship assignment: a CRUD API with routes, controllers and config kept apart, plus input validation and error handling.
+A backend internship assignment: a CRUD REST API with routes, controller, model and DB config in separate modules, required-field checks and 400/404/500 error responses.
 <br/><sub>`Node.js` `Express` `MySQL`</sub>
 
 </td>
@@ -180,7 +185,7 @@ A console ordering system with login, a categorised menu, a cart and an admin vi
 <td width="50%" valign="top">
 
 ### 🌱 [Autonomous Farming Robot](https://github.com/Vaibhav0710/DesignDevelopmentOfAutonomousFarmingWithPlanthealthIndicationSystem)
-My final-year engineering project: an IoT robot that monitors crop health and detects leaf disease with computer vision.
+Final-year B.E. project: an IoT robot that monitors crop and soil health and detects leaf disease with image processing.
 <br/><sub>`ESP32` `Arduino` `OpenCV` `Python` `IoT sensors`</sub>
 
 </td>
@@ -206,10 +211,13 @@ My final-year engineering project: an IoT robot that monitors crop health and de
 
 [![LeetCode](https://img.shields.io/badge/LeetCode_Solutions-0d1117?style=for-the-badge&logo=leetcode&logoColor=FFA116)](https://github.com/Vaibhav0710/Leetcode-solution)
 [![Daily DSA](https://img.shields.io/badge/90--Day_DSA_Plan-0d1117?style=for-the-badge&logo=openjdk&logoColor=58a6ff)](https://github.com/Vaibhav0710/Daily_DSA)
-[![CS50x](https://img.shields.io/badge/Harvard_CS50x-0d1117?style=for-the-badge&logo=harvard&logoColor=A51C30)](https://github.com/Vaibhav0710/CS50X)
-[![CS50P](https://img.shields.io/badge/Harvard_CS50P-0d1117?style=for-the-badge&logo=python&logoColor=3776AB)](https://github.com/Vaibhav0710/CS50P)
+[![CS50x](https://img.shields.io/badge/CS50x_repo-0d1117?style=for-the-badge&logo=github&logoColor=58a6ff)](https://github.com/Vaibhav0710/CS50X)
+[![CS50P](https://img.shields.io/badge/CS50P_repo-0d1117?style=for-the-badge&logo=python&logoColor=3776AB)](https://github.com/Vaibhav0710/CS50P)
 
-<sub>Solutions are written in Java and sync automatically from LeetCode and TUF+.</sub>
+<sub>LeetCode and TUF+ solutions sync automatically through LeetHub and TUFHub.</sub>
+
+**📜 Certifications**<br/>
+<sub>Java Full Stack LIVE Course (Spark 2.0) · Alpha: DSA with Java (Apna College) · Google Cloud Bootcamp (GeeksforGeeks) · LeetCode 100 Days Badge 2024</sub>
 
 </div>
 
@@ -219,24 +227,23 @@ My final-year engineering project: an IoT robot that monitors crop health and de
 
 <div align="center">
 
-<img src="https://skillicons.dev/icons?i=java,spring,py,js,ts,cpp,c&theme=dark" alt="Languages" />
+<img src="https://skillicons.dev/icons?i=java,spring,py,nodejs,cs&theme=dark" alt="Languages and frameworks" />
 <br/><br/>
-<img src="https://skillicons.dev/icons?i=postgres,mysql,redis,docker,gcp,maven&theme=dark" alt="Data and infrastructure" />
+<img src="https://skillicons.dev/icons?i=postgres,mysql,redis,mongodb,docker,gcp,maven,kafka&theme=dark" alt="Data and infrastructure" />
 <br/><br/>
-<img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,html,css&theme=dark" alt="Frontend" />
-<br/><br/>
-<img src="https://skillicons.dev/icons?i=git,github,postman,idea,vscode,linux&theme=dark" alt="Tools" />
+<img src="https://skillicons.dev/icons?i=git,github,linux&theme=dark" alt="Tools" />
 
 <br/><br/>
 
-![Apache Kafka](https://img.shields.io/badge/Apache_Kafka-231F20?style=flat-square&logo=apachekafka&logoColor=white)
 ![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-6DB33F?style=flat-square&logo=spring&logoColor=white)
 ![Spring Security](https://img.shields.io/badge/Spring_Security-6DB33F?style=flat-square&logo=springsecurity&logoColor=white)
-![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=flat-square&logo=hibernate&logoColor=white)
+![Spring Data JPA](https://img.shields.io/badge/Spring_Data_JPA-6DB33F?style=flat-square&logo=spring&logoColor=white)
 ![JWT](https://img.shields.io/badge/JWT-000000?style=flat-square&logo=jsonwebtokens&logoColor=white)
-![GCP Pub/Sub](https://img.shields.io/badge/GCP_Pub%2FSub-4285F4?style=flat-square&logo=googlecloud&logoColor=white)
 ![OpenFeign](https://img.shields.io/badge/OpenFeign-6DB33F?style=flat-square&logo=spring&logoColor=white)
-![Swagger](https://img.shields.io/badge/OpenAPI-85EA2D?style=flat-square&logo=swagger&logoColor=black)
+![OpenAPI](https://img.shields.io/badge/OpenAPI-85EA2D?style=flat-square&logo=swagger&logoColor=black)
+![Apache Kafka](https://img.shields.io/badge/Apache_Kafka_%28projects%29-231F20?style=flat-square&logo=apachekafka&logoColor=white)
+
+<sub>At work: Python (Flask), Node.js (Express), C#/.NET, PostgreSQL, Redis, BigQuery, Google Cloud.<br/>In projects and training: Java, Spring Boot, Spring Cloud, Kafka.</sub>
 
 </div>
 
@@ -279,7 +286,7 @@ My final-year engineering project: an IoT robot that monitors crop health and de
 ### 💡 *"Make it work, make it right, make it fast" (in that order)*
 
 **Open to conversations about backend engineering, distributed systems and interesting problems.**<br/>
-[Say hi →](mailto:vaibhavjain7171@gmail.com)
+[Say hi →](mailto:vaibhav.jain.careers@gmail.com)
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:58a6ff&height=120&section=footer" width="100%"/>
 
