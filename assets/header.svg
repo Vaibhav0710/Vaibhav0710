@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="220" viewBox="0 0 1200 220" role="img" aria-label="Vaibhav Jain, Backend Developer">
+  <defs>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0d1117"/>
+      <stop offset="0.6" stop-color="#161b22"/>
+      <stop offset="1" stop-color="#58a6ff"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .name { font: 700 60px 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; fill: #58a6ff; animation: fade 1.2s ease-in both; }
+    .desc { font: 400 20px 'Segoe UI', Ubuntu, 'Helvetica Neue', Arial, sans-serif; fill: #8b949e; animation: fade 1.2s 0.3s ease-in both; }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    @media (prefers-reduced-motion: reduce) { .name, .desc { animation: none; } }
+  </style>
+  <path fill="url(#wave)" d="M0 0H1200V170C1050 215 900 140 750 165S450 215 300 180 100 150 0 175Z"/>
+  <text class="name" x="600" y="90" text-anchor="middle">Vaibhav Jain</text>
+  <text class="desc" x="600" y="130" text-anchor="middle">Backend Developer • Booking &amp; Scheduling APIs • Google Cloud</text>
+</svg>
