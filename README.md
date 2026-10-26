@@ -27,7 +27,7 @@ public class VaibhavJain implements BackendDeveloper {
     private final String experience = "1.5 years: intern from Apr 2025, full-time since Nov 2025";
 
     private final String[] workStack    = { "Python (Flask)", "Node.js (Express)", "C#/.NET", "PostgreSQL", "Redis", "BigQuery", "Google Cloud" };
-    private final String[] projectStack = { "Java", "Spring Boot", "Spring Cloud", "Kafka" };
+    private final String[] projectStack = { "Java", "Spring Boot", "Spring Cloud", "Kafka", "Docker", "Kubernetes" };
 
     @Override
     public String atWork() {
@@ -67,23 +67,20 @@ public class VaibhavJain implements BackendDeveloper {
 
 ```mermaid
 flowchart LR
-    C([Client]) --> GW["API Gateway<br/>Spring Cloud Gateway · Redis rate limiter"]
+    C([Client]) --> GW["API Gateway<br/>rate limiter · circuit breakers"]
 
     GW --> US["User Service<br/>JWT · BCrypt · RBAC"]
-    GW --> CS["Candidate Service<br/>lifecycle · soft delete"]
+    GW --> CS["Candidate Service<br/>lifecycle · Redis read cache"]
     GW --> VS["Voting Service<br/>SHA-256 hash chain"]
     GW --> RS["Result Service<br/>live SSE stream"]
 
-    VS -- Feign --> CS
+    VS -- "Feign + Resilience4j" --> CS
     CS -- "candidate.*" --> K{{Apache Kafka}}
     VS -- "vote.cast" --> K
     K -- "vote.cast" --> RS
 
-    US --> P1[(PostgreSQL)]
-    CS --> P2[(PostgreSQL)]
-    VS --> P3[(PostgreSQL)]
-    VS --> R[(Redis)]
-    RS --> R
+    US & CS & VS --> PG[("PostgreSQL<br/>one schema per service")]
+    GW & CS & VS & RS --> R[(Redis)]
 
     EU["Eureka<br/>service discovery"] -.- GW
 ```
@@ -95,16 +92,22 @@ flowchart LR
 **🔗 How the chain works**
 
 ```java
-String prevHash = lastVoteOpt
-        .map(Vote::getVoteHash)
-        .orElse("GENESIS");
+// one row per election, SELECT … FOR UPDATE
+ElectionChainHead head =
+        chainHeadService.lockHead(electionId);
 
-String newHash = hashingService.generateHash(
-        userId + candidateId + electionId
-        + timestampSeconds + prevHash);
+Vote vote = Vote.builder()
+        .prevHash(head.getLastHash()) // "GENESIS" first
+        /* user, candidate, election, time */
+        .build();
+
+// SHA-256(userId + candidateId + electionId
+//         + epochSeconds + prevHash)
+vote.setVoteHash(voteHasher.computeHash(vote));
+head.setLastHash(vote.getVoteHash());
 ```
 
-`POST /api/v1/votes/chain/validate/{electionId}` (admin only) recomputes every hash in the election and reports how many links are broken.
+Locking the election's chain head makes concurrent votes link one after another. `POST /api/v1/votes/chain/validate/{electionId}` (admin only) recomputes every hash in the election and reports how many links are broken.
 
 </td>
 <td width="50%" valign="top">
@@ -115,7 +118,7 @@ String newHash = hashingService.generateHash(
 - A unique constraint in the database is the final guard
 - Idempotency keys make retries safe
 - The gateway rate-limits each user with Redis token buckets
-- Results update live over **Server-Sent Events**
+- Result Service skips vote ids it has already counted, so each vote counts once
 
 </td>
 </tr>
@@ -123,16 +126,25 @@ String newHash = hashingService.generateHash(
 
 | Service | Responsibility | Repo |
 |:--|:--|:--:|
-| 🧭 API Gateway | Routing, JWT check through User Service, Redis rate limiting | [`Voting_Api-Gateway`](https://github.com/Vaibhav0710/Voting_Api-Gateway) |
+| 🧭 API Gateway | Routing, JWT check through User Service, role checks, CORS, Redis rate limiting, circuit breakers with fallbacks | [`Voting_Api-Gateway`](https://github.com/Vaibhav0710/Voting_Api-Gateway) |
 | 👤 User Service | Registration, login, BCrypt, Voter/Admin roles | [`Voting_User_Service`](https://github.com/Vaibhav0710/Voting_User_Service) |
-| 🧑‍💼 Candidate Service | Candidate lifecycle (Active / Disqualified / Withdrawn), Kafka events | [`Voting_Candidate_Service`](https://github.com/Vaibhav0710/Voting_Candidate_Service) |
+| 🧑‍💼 Candidate Service | Candidate lifecycle (Active / Disqualified / Withdrawn), Redis read cache, Kafka events sent after commit | [`Voting_Candidate_Service`](https://github.com/Vaibhav0710/Voting_Candidate_Service) |
 | 🗳️ Voting Service | Casting votes, hash chaining, verification, double-vote guard | [`Voting_Voting_Service`](https://github.com/Vaibhav0710/Voting_Voting_Service) |
 | 📊 Result Service | Live counts from Kafka, kept in Redis, streamed over SSE | [`Voting_Result_Service`](https://github.com/Vaibhav0710/Voting_Result_Service) |
 | 📡 Eureka Server | Service discovery | [`Voting_Eureka_Server`](https://github.com/Vaibhav0710/Voting_Eureka_Server) |
 
+**Beyond the core features**
+
+| | |
+|:-:|:--|
+| 🛡️ | **Resilience:** Resilience4j circuit breakers on every gateway route. If Candidate Service is down, Voting Service falls back to a Redis cache of candidate statuses it has already seen. |
+| 📈 | **Observability:** Prometheus metrics, a Grafana dashboard, Zipkin tracing and JSON logs shipped to ELK. |
+| 🐳 | **Deployment:** a Dockerfile per service, a full Docker Compose stack, and Kubernetes manifests (Kustomize, ingress). |
+| 🧪 | **Testing:** JUnit tests in every service, a Testcontainers PostgreSQL test, JaCoCo coverage, scripted end-to-end and chaos runs, and Gatling load tests. |
+
 <div align="center">
 
-**Java 17 · Spring Boot 3.3 · Spring Cloud 2023 · Kafka · Redis · PostgreSQL · OpenFeign · JJWT** &nbsp;→&nbsp; [**Voting_System**](https://github.com/Vaibhav0710/Voting_System)
+**Java 17 · Spring Boot 3.3 · Spring Cloud 2023 · Kafka · Redis · PostgreSQL · OpenFeign · Resilience4j · JJWT · Docker · Kubernetes** &nbsp;→&nbsp; [**Voting_System**](https://github.com/Vaibhav0710/Voting_System)
 
 </div>
 
@@ -229,7 +241,7 @@ Final-year B.E. project: an IoT robot that monitors crop and soil health and det
 
 <img src="https://skillicons.dev/icons?i=java,spring,py,nodejs,cs&theme=dark" alt="Languages and frameworks" />
 <br/><br/>
-<img src="https://skillicons.dev/icons?i=postgres,mysql,redis,mongodb,docker,gcp,maven,kafka&theme=dark" alt="Data and infrastructure" />
+<img src="https://skillicons.dev/icons?i=postgres,mysql,redis,mongodb,docker,kubernetes,gcp,maven,kafka,prometheus,grafana&theme=dark" alt="Data and infrastructure" />
 <br/><br/>
 <img src="https://skillicons.dev/icons?i=git,github,linux&theme=dark" alt="Tools" />
 
@@ -242,8 +254,9 @@ Final-year B.E. project: an IoT robot that monitors crop and soil health and det
 ![OpenFeign](https://img.shields.io/badge/OpenFeign-6DB33F?style=flat-square&logo=spring&logoColor=white)
 ![OpenAPI](https://img.shields.io/badge/OpenAPI-85EA2D?style=flat-square&logo=swagger&logoColor=black)
 ![Apache Kafka](https://img.shields.io/badge/Apache_Kafka_%28projects%29-231F20?style=flat-square&logo=apachekafka&logoColor=white)
+![Resilience4j](https://img.shields.io/badge/Resilience4j_%28projects%29-0d1117?style=flat-square)
 
-<sub>At work: Python (Flask), Node.js (Express), C#/.NET, PostgreSQL, Redis, BigQuery, Google Cloud.<br/>In projects and training: Java, Spring Boot, Spring Cloud, Kafka.</sub>
+<sub>At work: Python (Flask), Node.js (Express), C#/.NET, PostgreSQL, Redis, BigQuery, Google Cloud.<br/>In projects and training: Java, Spring Boot, Spring Cloud, Kafka, Resilience4j, Docker, Kubernetes, Prometheus, Grafana.</sub>
 
 </div>
 
@@ -252,9 +265,7 @@ Final-year B.E. project: an IoT robot that monitors crop and soil health and det
 ## 🔭 &nbsp;Next on the roadmap
 
 ```diff
-+ Resilience4j circuit breakers between the voting services
-+ Prometheus + Grafana dashboards for every service
-+ Docker images and Kubernetes manifests for the voting platform
++ Finish the 10,000-vote load run (p95 under 500 ms, zero errors) and publish the results
 + Deeper system design: consistency, partitioning, back-pressure
 ```
 
