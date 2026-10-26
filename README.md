@@ -1,14 +1,14 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:58a6ff&height=220&section=header&text=Vaibhav%20Jain&fontSize=60&fontColor=58a6ff&fontAlignY=35&desc=Backend%20Developer%20%E2%80%A2%20Booking%20%26%20Scheduling%20APIs%20%E2%80%A2%20Google%20Cloud&descSize=18&descColor=8b949e&descAlignY=55&animation=fadeIn" width="100%"/>
+<img src="assets/header.svg" width="100%" alt="Vaibhav Jain, Backend Developer · Booking &amp; Scheduling APIs · Google Cloud"/>
 
 <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=600&size=22&duration=3000&pause=1000&color=58A6FF&center=true&vCenter=true&repeat=true&width=650&height=40&lines=Booking+%26+scheduling+APIs+on+Google+Cloud;Python+%E2%80%A2+Node.js+%E2%80%A2+C%23%2F.NET+at+work;Java+%E2%80%A2+Spring+Boot+%E2%80%A2+Kafka+in+projects;Every+vote+SHA-256+chained+to+the+last+one;Mechanical+engineer+turned+backend+developer" alt="Typing SVG" /></a>
 
 <br/>
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-0d1117?style=for-the-badge&logo=vercel&logoColor=58a6ff)](https://vaibhavjain-portfolio.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=linkedin&logoColor=58a6ff)](https://www.linkedin.com/in/-vaibhavjain/)
-[![Resume](https://img.shields.io/badge/Resume-0d1117?style=for-the-badge&logo=adobeacrobatreader&logoColor=58a6ff)](https://vaibhavjain-portfolio.vercel.app/Vaibhav_Jain_Java_Backend_Developer_CV.pdf)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0d1117?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPGcgZmlsbD0iIzU4YTZmZiI%2BPGNpcmNsZSBjeD0iNC41IiBjeT0iNC41IiByPSIyLjUiLz48cmVjdCB4PSIyLjQiIHk9IjguNSIgd2lkdGg9IjQuMiIgaGVpZ2h0PSIxMy41Ii8%2BPHBhdGggZD0iTTkuMiA4LjVoNHYxLjloLjFjLjYtMS4xIDEuOS0yLjIgMy45LTIuMiA0LjIgMCA0LjkgMi43IDQuOSA2LjNWMjJoLTQuMnYtNi42YzAtMS42IDAtMy42LTIuMi0zLjZzLTIuNSAxLjctMi41IDMuNVYyMkg5LjJ6Ii8%2BPC9nPjwvc3ZnPg%3D%3D)](https://www.linkedin.com/in/-vaibhavjain/)
+[![Resume](https://img.shields.io/badge/Resume-0d1117?style=for-the-badge&logo=data:image/svg%2Bxml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI%2BPHBhdGggZmlsbD0iIzU4YTZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBkPSJNNSAyaDkuNUwyMCA3LjVWMjJINXpNMTMuNSAzLjVWOC41aDV6TTggMTJoOXYxLjZIOHpNOCAxNS41aDl2MS42SDh6TTggMTloNnYxLjZIOHoiLz48L3N2Zz4%3D)](https://vaibhavjain-portfolio.vercel.app/Vaibhav_Jain_Java_Backend_Developer_CV.pdf)
 [![Email](https://img.shields.io/badge/Email-0d1117?style=for-the-badge&logo=gmail&logoColor=58a6ff)](mailto:vaibhav.jain.careers@gmail.com)
 [![Profile Views](https://komarev.com/ghpvc/?username=Vaibhav0710&style=for-the-badge&color=58a6ff&labelColor=0d1117&label=VIEWS)](https://github.com/Vaibhav0710)
 
@@ -300,6 +300,6 @@ Final-year B.E. project: an IoT robot that monitors crop and soil health and det
 **Open to conversations about backend engineering, distributed systems and interesting problems.**<br/>
 [Say hi →](mailto:vaibhav.jain.careers@gmail.com)
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0d1117,50:161b22,100:58a6ff&height=120&section=footer" width="100%"/>
+<img src="assets/footer.svg" width="100%" alt=""/>
 
 </div>
