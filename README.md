@@ -1,43 +1,42 @@
-<a href="https://vaibhavjain-portfolio.vercel.app/"><img src="assets/hero.svg" width="100%" alt="Vaibhav Jain — Backend Developer. Booking & scheduling APIs on Google Cloud for healthtech. Junior Software Developer @ IntelligentDX, Pune, India."/></a>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheet-profile-dark.svg" />
+  <img src="assets/sheet-profile-light.svg" width="100%" alt="Vaibhav Jain. Backend developer at IntelligentDX in Pune, building booking and scheduling APIs on Google Cloud for eye-care practices. Route: B.E. Mechanical at MESCOE Pune (2019–2023), PG-DAC at C-DAC, intern from April 2025, developer since November 2025." />
+</picture>
 
-<p align="center">
-  <a href="https://vaibhavjain-portfolio.vercel.app/"><img src="https://img.shields.io/badge/Portfolio-0b1220?style=for-the-badge&logo=vercel&logoColor=22d3ee" alt="Portfolio"/></a>
-  <a href="https://www.linkedin.com/in/-vaibhavjain/"><img src="https://img.shields.io/badge/LinkedIn-0b1220?style=for-the-badge&logo=linkedin&logoColor=a78bfa" alt="LinkedIn"/></a>
-  <a href="https://vaibhavjain-portfolio.vercel.app/Vaibhav_Jain_Java_Backend_Developer_CV.pdf"><img src="https://img.shields.io/badge/Resume-0b1220?style=for-the-badge&logo=adobeacrobatreader&logoColor=f472b6" alt="Resume"/></a>
-  <a href="mailto:vaibhav.jain.careers@gmail.com"><img src="https://img.shields.io/badge/Email-0b1220?style=for-the-badge&logo=gmail&logoColor=34d399" alt="Email"/></a>
-  <img src="https://komarev.com/ghpvc/?username=Vaibhav0710&style=for-the-badge&color=0b1220&labelColor=0b1220&label=%F0%9F%91%80%20VIEWS" alt="Profile views"/>
-</p>
+[Portfolio](https://vaibhavjain-portfolio.vercel.app/) · [LinkedIn](https://www.linkedin.com/in/-vaibhavjain/) · [Resume (PDF)](https://vaibhavjain-portfolio.vercel.app/Vaibhav_Jain_Java_Backend_Developer_CV.pdf) · [vaibhav.jain.careers@gmail.com](mailto:vaibhav.jain.careers@gmail.com)
 
-<br/>
+## Work
 
-## ⚡ What I ship at IntelligentDX
-
-<sub>Healthtech software for eye-care practices · intern from Apr 2025, full-time since Nov 2025</sub>
-
-<img src="assets/impact.svg" width="100%" alt="Impact: treatment-plan booking across 15 parallel lanes, live since Sep 2026; cancel and reschedule with HTTP 207; slot search cut from 2.7–3.6s to 1.7–2.5s; background sync for 213 providers × 111 locations × 70 visit types; AI rule generation 27–31% cheaper per rule; 10 read paths across 5 C#/.NET services migrated from MongoDB to PostgreSQL in ~8 weeks."/>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheet-parts-dark.svg" />
+  <img src="assets/sheet-parts-light.svg" width="100%" alt="Parts list of work at IntelligentDX. Six items, listed in text below." />
+</picture>
 
 <details>
-<summary><b>Read the details</b></summary>
-<br/>
+<summary>Same list as text</summary>
 
-- **Treatment-plan booking API.** Books every visit of a multi-appointment plan across up to 15 parallel lanes, with atomic slot reservation, one audit row per appointment and 200/207/422 responses. In production since September 2026.
-- **Cancel & reschedule APIs.** On an EHR with no native reschedule: book the new slot first, retry at timed offsets, return HTTP 207 on partial success, full audit trail.
-- **Background sync.** Cloud Scheduler → Cloud Run Jobs → PostgreSQL for 213 providers × 111 locations × 70 visit types, replacing slow or timing-out external calls with indexed database reads.
-- **Faster slot search.** About 2.7–3.6 s down to 1.7–2.5 s with a concurrent pager; moved scheduling APIs to an EHR's FHIR R4 API with unchanged API contracts.
-- **AI rule generation.** A platform around Claude with validation gates and a repair loop; prompt caching cut cost per generated rule by about 27–31%.
-- **Internship migration.** 10 API read paths across 5 C#/.NET microservices moved from MongoDB to PostgreSQL in about 8 weeks; 9 reached production with identical responses.
+1. **Treatment-plan booking API.** Books every visit of a multi-appointment plan across up to 15 parallel lanes, with atomic slot reservation, one audit row per appointment and 200/207/422 responses. In production since September 2026.
+2. **Cancel and reschedule APIs.** Built on an EHR with no native reschedule: book the new slot first, retry at timed offsets, return HTTP 207 on partial success, keep a full audit trail.
+3. **Background sync.** Cloud Scheduler to Cloud Run Jobs to PostgreSQL for 213 providers × 111 locations × 70 visit types, replacing slow or timing-out external calls with indexed reads.
+4. **Slot-search API.** About 2.7–3.6 s down to 1.7–2.5 s with a concurrent pager. Scheduling APIs moved to the EHR's FHIR R4 API with unchanged contracts.
+5. **AI rule generation.** A platform around Claude with validation gates and a repair loop. Prompt caching cut cost per generated rule by about 27–31%.
+6. **MongoDB to PostgreSQL (internship).** 10 API read paths across 5 C#/.NET microservices in about 8 weeks. 9 reached production with identical responses.
 
 </details>
 
-<br/>
+## Voting system
 
-## 🗳️ Flagship project
+<a href="https://github.com/Vaibhav0710/Voting_System">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/sheet-voting-dark.svg" />
+  <img src="assets/sheet-voting-light.svg" width="100%" alt="Blockchain-Inspired Voting System. Each vote stores the SHA-256 hash of the vote before it. If vote 3 is edited its hash changes, vote 4 still stores the old hash, and the validate endpoint reports the broken link. Six services: API Gateway, User, Candidate, Voting, Result, Eureka." />
+</picture>
+</a>
 
-<a href="https://github.com/Vaibhav0710/Voting_System"><img src="assets/voting.svg" width="100%" alt="Blockchain-Inspired Voting System: each vote stores the SHA-256 hash of the previous vote, so editing a row breaks the chain and the validator finds the broken link. Six Spring Boot services: API Gateway, User, Candidate, Voting, Result, Eureka."/></a>
+Code: [Voting_System](https://github.com/Vaibhav0710/Voting_System) · services: [gateway](https://github.com/Vaibhav0710/Voting_Api-Gateway), [user](https://github.com/Vaibhav0710/Voting_User_Service), [candidate](https://github.com/Vaibhav0710/Voting_Candidate_Service), [voting](https://github.com/Vaibhav0710/Voting_Voting_Service), [result](https://github.com/Vaibhav0710/Voting_Result_Service), [eureka](https://github.com/Vaibhav0710/Voting_Eureka_Server)
 
 <details>
-<summary><b>Architecture</b></summary>
-<br/>
+<summary>Architecture</summary>
 
 ```mermaid
 flowchart LR
@@ -57,95 +56,30 @@ flowchart LR
 
 </details>
 
-<details>
-<summary><b>How the hash chain works</b></summary>
-<br/>
+## Other projects
 
-```java
-// one row per election, SELECT … FOR UPDATE
-ElectionChainHead head = chainHeadService.lockHead(electionId);
+| Project | What it is | Stack |
+|:--|:--|:--|
+| [Courier Management System](https://github.com/Vaibhav0710/Courier-management-system) | Delivery platform with Admin, Customer and Delivery-Partner modules, JWT login and OpenAPI docs | Java 21, Spring Boot 3.4, JPA, MySQL, React |
+| [Portfolio](https://github.com/Vaibhav0710/Portfolio) | My site, [live on Vercel](https://vaibhavjain-portfolio.vercel.app/) | Next.js, TypeScript, Tailwind |
+| [Rent-A-Car](https://github.com/Vaibhav0710/Rent_A_Car) | Console car rental with entity, DAO and service layers | Java 17, JDBC, MySQL |
+| [User Management API](https://github.com/Vaibhav0710/Backend-Developer-Intern-Assignment-Submission-Details) | CRUD REST API with field checks and 400/404/500 errors | Node.js, Express, MySQL |
+| [Pizza Shop](https://github.com/Vaibhav0710/Pizza-Shop) | Console ordering with a menu, a cart and an admin view | Core Java, JDBC, MySQL |
+| [Autonomous Farming Robot](https://github.com/Vaibhav0710/DesignDevelopmentOfAutonomousFarmingWithPlanthealthIndicationSystem) | Final-year B.E. project: IoT robot that checks soil and detects leaf disease | ESP32, Arduino, OpenCV, Python |
+| [Sudoku](https://github.com/Vaibhav0710/Sudoku_Game) | Desktop Sudoku with a generator and saved progress | Java, JavaFX |
+| [Movie Finder](https://github.com/Vaibhav0710/Movie-Finder) | Movie search on the OMDB API | React |
 
-Vote vote = Vote.builder()
-        .prevHash(head.getLastHash())   // "GENESIS" for the first vote
-        /* user, candidate, election, time */
-        .build();
+## Tools
 
-// SHA-256(userId + candidateId + electionId + epochSeconds + prevHash)
-vote.setVoteHash(voteHasher.computeHash(vote));
-head.setLastHash(vote.getVoteHash());
-```
+**At work:** Python (Flask), Node.js (Express), C#/.NET, PostgreSQL, Redis, BigQuery, Google Cloud<br/>
+**In projects:** Java, Spring Boot, Spring Cloud, Kafka, Resilience4j, Docker, Kubernetes, Prometheus, Grafana
 
-Locking the chain head makes concurrent votes link one after another. `POST /api/v1/votes/chain/validate/{electionId}` (admin only) recomputes every hash and reports how many links are broken.
+## Practice
 
-**Double votes are stopped by:** a Redis `voted:` key for fast rejection · a unique DB constraint as the final guard · idempotency keys for safe retries · per-user Redis token-bucket rate limits · Result Service skipping vote ids it has already counted.
+[LeetCode solutions](https://github.com/Vaibhav0710/Leetcode-solution) and a [90-day DSA plan](https://github.com/Vaibhav0710/Daily_DSA), synced through LeetHub and TUFHub. Coursework in [CS50x](https://github.com/Vaibhav0710/CS50X) and [CS50P](https://github.com/Vaibhav0710/CS50P).<br/>
+Certificates: Java Full Stack LIVE (Spark 2.0), Alpha: DSA with Java (Apna College), Google Cloud Bootcamp (GeeksforGeeks), LeetCode 100 Days Badge 2024.
 
-**Beyond the core:** Resilience4j circuit breakers with Redis fallbacks · Prometheus + Grafana, Zipkin, ELK · Docker Compose and Kubernetes (Kustomize, ingress) · JUnit, Testcontainers, JaCoCo, end-to-end and chaos scripts, Gatling load tests.
-
-</details>
-
-<details>
-<summary><b>Service repos</b></summary>
-<br/>
-
-| Service | Responsibility | Repo |
-|:--|:--|:--:|
-| 🧭 API Gateway | Routing, JWT check, role checks, CORS, Redis rate limiting, circuit breakers | [`Voting_Api-Gateway`](https://github.com/Vaibhav0710/Voting_Api-Gateway) |
-| 👤 User | Registration, login, BCrypt, Voter/Admin roles | [`Voting_User_Service`](https://github.com/Vaibhav0710/Voting_User_Service) |
-| 🧑‍💼 Candidate | Lifecycle (Active / Disqualified / Withdrawn), Redis cache, Kafka events after commit | [`Voting_Candidate_Service`](https://github.com/Vaibhav0710/Voting_Candidate_Service) |
-| 🗳️ Voting | Casting votes, hash chaining, verification, double-vote guard | [`Voting_Voting_Service`](https://github.com/Vaibhav0710/Voting_Voting_Service) |
-| 📊 Result | Live counts from Kafka, kept in Redis, streamed over SSE | [`Voting_Result_Service`](https://github.com/Vaibhav0710/Voting_Result_Service) |
-| 📡 Eureka | Service discovery | [`Voting_Eureka_Server`](https://github.com/Vaibhav0710/Voting_Eureka_Server) |
-
-</details>
-
-<br/>
-
-## 🧰 More builds
-
-<p align="center">
-  <a href="https://github.com/Vaibhav0710/Courier-management-system"><img src="assets/project-courier.svg" width="49%" alt="Courier Management: full-stack delivery platform — Spring Boot 3.4, JPA, MySQL, React"/></a>
-  <a href="https://github.com/Vaibhav0710/Portfolio"><img src="assets/project-portfolio.svg" width="49%" alt="Portfolio: personal site on Vercel — Next.js, TypeScript, Tailwind"/></a>
-</p>
-<p align="center">
-  <a href="https://github.com/Vaibhav0710/Rent_A_Car"><img src="assets/project-rentacar.svg" width="49%" alt="Rent-A-Car: layered car-rental system — Java 17, JDBC, MySQL"/></a>
-  <a href="https://github.com/Vaibhav0710/Backend-Developer-Intern-Assignment-Submission-Details"><img src="assets/project-userapi.svg" width="49%" alt="User Management API: modular CRUD REST API — Node.js, Express, MySQL"/></a>
-</p>
-<p align="center">
-  <a href="https://github.com/Vaibhav0710/DesignDevelopmentOfAutonomousFarmingWithPlanthealthIndicationSystem"><img src="assets/project-farmbot.svg" width="49%" alt="Autonomous Farming Robot: IoT crop and soil monitoring — ESP32, OpenCV, Python"/></a>
-  <a href="https://github.com/Vaibhav0710/Pizza-Shop"><img src="assets/project-pizza.svg" width="49%" alt="Pizza Shop: console ordering system — Core Java, JDBC, MySQL"/></a>
-</p>
-
-<p align="center"><sub>Also: <a href="https://github.com/Vaibhav0710/Sudoku_Game">🧩 Sudoku</a> (JavaFX) · <a href="https://github.com/Vaibhav0710/Movie-Finder">🎬 Movie Finder</a> (React)</sub></p>
-
-<br/>
-
-## 🛠️ Toolbox
-
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=py,flask,nodejs,express,cs,dotnet,postgres,redis,gcp&theme=dark&perline=9" alt="At work: Python, Flask, Node.js, Express, C#, .NET, PostgreSQL, Redis, Google Cloud"/><br/>
-  <sub><b>AT WORK</b></sub>
-</p>
-<p align="center">
-  <img src="https://skillicons.dev/icons?i=java,spring,kafka,mysql,mongodb,docker,kubernetes,prometheus,grafana&theme=dark&perline=9" alt="In projects: Java, Spring, Kafka, MySQL, MongoDB, Docker, Kubernetes, Prometheus, Grafana"/><br/>
-  <sub><b>IN PROJECTS</b></sub>
-</p>
-
-<br/>
-
-## 🧠 Always learning
-
-<p align="center">
-  <a href="https://github.com/Vaibhav0710/Leetcode-solution"><img src="https://img.shields.io/badge/LeetCode_Solutions-0b1220?style=for-the-badge&logo=leetcode&logoColor=FFA116" alt="LeetCode"/></a>
-  <a href="https://github.com/Vaibhav0710/Daily_DSA"><img src="https://img.shields.io/badge/90--Day_DSA_Plan-0b1220?style=for-the-badge&logo=openjdk&logoColor=22d3ee" alt="Daily DSA"/></a>
-  <a href="https://github.com/Vaibhav0710/CS50X"><img src="https://img.shields.io/badge/CS50x-0b1220?style=for-the-badge&logo=harvard&logoColor=f472b6" alt="CS50x"/></a>
-  <a href="https://github.com/Vaibhav0710/CS50P"><img src="https://img.shields.io/badge/CS50P-0b1220?style=for-the-badge&logo=python&logoColor=a78bfa" alt="CS50P"/></a>
-  <br/>
-  <sub>Java Full Stack LIVE (Spark 2.0) · Alpha: DSA with Java (Apna College) · Google Cloud Bootcamp (GeeksforGeeks) · LeetCode 100 Days Badge 2024</sub>
-</p>
-
-<br/>
-
-## 📈 Activity
+## Activity
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Vaibhav0710/Vaibhav0710/output/profile-night-view.svg" />
@@ -153,14 +87,4 @@ Locking the chain head makes concurrent votes link one after another. `POST /api
   <img width="100%" alt="3D contribution calendar with totals and languages" src="https://raw.githubusercontent.com/Vaibhav0710/Vaibhav0710/output/profile-night-view.svg" />
 </picture>
 
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Vaibhav0710/Vaibhav0710/output/github-snake-dark.svg" />
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/Vaibhav0710/Vaibhav0710/output/github-snake.svg" />
-  <img width="100%" alt="Snake eating my contribution graph" src="https://raw.githubusercontent.com/Vaibhav0710/Vaibhav0710/output/github-snake-dark.svg" />
-</picture>
-
-<br/><br/>
-
-<a href="mailto:vaibhav.jain.careers@gmail.com"><img src="assets/footer.svg" width="100%" alt="Let's build something reliable — vaibhav.jain.careers@gmail.com"/></a>
-
-<!-- Graphics in assets/ are generated by scripts/build_assets.py. Edit the text there and re-run it. -->
+<!-- The drawing sheets in assets/ are generated by scripts/build_sheets.py. Edit the text there and re-run it. -->
