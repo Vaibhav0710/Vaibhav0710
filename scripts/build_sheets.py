@@ -44,10 +44,28 @@ THEMES = {
 
 
 # --------------------------------------------------------------------------- text
+SUBS = set("₀₁₂₃₄")
+
+
+def faces(s, cls):
+    """Yield (char, face) pairs: arrows, and any word holding a subscript, use the mono face."""
+    if cls in ("m", "mm"):
+        for ch in s:
+            yield ch, cls
+        return
+    for i, word in enumerate(s.split(" ")):
+        if i:
+            yield " ", cls
+        core = word.rstrip(".,;:")
+        mono = any(ch in SUBS for ch in core)
+        for k, ch in enumerate(word):
+            yield ch, "m" if (mono and k < len(core)) or ch in MONO_ONLY else cls
+
+
 def width(s, cls, size):
     total = 0
-    for ch in s:
-        f = _fonts["m" if ch in MONO_ONLY and cls not in ("m", "mm") else cls]
+    for ch, face in faces(s, cls):
+        f = _fonts[face]
         g = f.getBestCmap().get(ord(ch))
         total += f["hmtx"][g][0] if g else f["head"].unitsPerEm * 0.5
     return total / _fonts[cls]["head"].unitsPerEm * size
@@ -67,10 +85,10 @@ def wrap(s, cls, size, maxw):
 
 def rich(s, cls):
     out = ""
-    for ch in s:
+    for ch, face in faces(s, cls):
         e = escape(ch, quote=False)
-        out += f'<tspan class="m">{e}</tspan>' if ch in MONO_ONLY and cls not in ("m", "mm") else e
-    return out
+        out += f'<tspan class="m">{e}</tspan>' if face != cls else e
+    return out.replace('</tspan><tspan class="m">', "")
 
 
 class Sheet:
@@ -89,8 +107,8 @@ class Sheet:
         return f' class="{kind}" style="animation-delay:{self.t_at(y, extra):.2f}s"'
 
     def text(self, x, y, s, cls="b", size=16, color="ink", anchor=None, ls=None):
-        for ch in s:
-            self.used["m" if ch in MONO_ONLY and cls not in ("m", "mm") else cls].add(ch)
+        for ch, face in faces(s, cls):
+            self.used[face].add(ch)
         a = f' text-anchor="{anchor}"' if anchor else ""
         l = f' letter-spacing="{ls}"' if ls else ""
         self.add(f'<text class="{cls} fd" style="animation-delay:{self.t_at(y, 0.35):.2f}s" x="{x:.1f}" y="{y:.1f}" font-size="{size}" fill="{self.c[color]}"{a}{l}>{rich(s, cls)}</text>')
@@ -291,7 +309,7 @@ PARTS = [
      "Books every visit of a multi-appointment plan with atomic slot reservation, one audit row per appointment and 200/207/422 responses. In production since September 2026."),
     ("HTTP 207", "Cancel and reschedule APIs",
      "Built on an EHR with no native reschedule: book the new slot first, retry at timed offsets, report partial success, keep a full audit trail."),
-    ("213×111×70", "Background sync",
+    ("213 × 111 × 70", "Background sync",
      "Providers × locations × visit types. Cloud Scheduler to Cloud Run Jobs to PostgreSQL, so indexed reads replace slow or timing-out external calls."),
     ("1.7–2.5 s", "Slot-search API",
      "Down from 2.7–3.6 s with a concurrent pager (detail B). Scheduling APIs moved to the EHR's FHIR R4 API with unchanged contracts."),

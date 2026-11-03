@@ -124,14 +124,17 @@ def sheet_activity(data, theme):
 
     weeks = data["weeks"]
     totals = [sum(c for _, c in w) for w in weeks]
-    top = nice_max(max(totals) if totals else 1)
-    x0, x1, y0, y1 = 110, 1136, 190, 400  # plot box
+    peak = max(totals) if totals else 1
+    step = next(st for st in (1, 2, 5, 10, 20, 25, 50, 100, 200, 250, 500, 1000) if peak / st <= 5)
+    ticks = math.ceil(max(peak, 1) / step)
+    top = step * ticks
+    x0, x1, y0, y1 = 110, 1076, 190, 400  # plot box
     bw = (x1 - x0) / len(totals)
     Y = lambda v: y1 - v / top * (y1 - y0)
 
     s.text(64, 168, "CONTRIBUTIONS PER WEEK", "mm", 12.5, "ink", ls=1.5)
-    for k in range(5):
-        v = top * k / 4
+    for k in range(ticks + 1):
+        v = step * k
         y = Y(v)
         s.line(x0, y, x1, y, "faint" if k else "ink", 1 if k else 1.2)
         s.text(x0 - 10, y + 4, f"{v:g}", "m", 11.5, "ink2", "end")
@@ -152,7 +155,7 @@ def sheet_activity(data, theme):
     # average line and the busiest week
     avg = sum(totals) / len(totals) if totals else 0
     s.line(x0, Y(avg), x1, Y(avg), "red", 1, "6 4")
-    s.text(x0 - 10, Y(avg) + 4, f"AVG {avg:.1f}", "mm", 10.5, "red", "end", 0.5)
+    s.text(x1 + 8, Y(avg) + 4, f"AVG {avg:.1f}", "mm", 10.5, "red", ls=0.5)
     if totals and max(totals):
         i = totals.index(max(totals))
         bx = x0 + (i + 0.5) * bw
