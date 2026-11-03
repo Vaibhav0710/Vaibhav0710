@@ -37,8 +37,9 @@ _fonts = {k: TTFont(FONT_DIR / f[0]) for k, f in FACES.items()}
 MONO_ONLY = set("→←↔₀₁₂₃₄")
 
 THEMES = {
-    "light": dict(paper="#f7f8f8", ink="#1c2026", ink2="#4b535d", line="#98a2ad", faint="#dfe3e7", red="#bf3b28"),
-    "dark": dict(paper="#14171b", ink="#e3e7eb", ink2="#a6afb9", line="#5f6974", faint="#262b31", red="#e8735f"),
+    "light": dict(paper="#f7f8f8", ink="#1c2026", ink2="#4b535d", line="#98a2ad", faint="#dfe3e7", red="#bf3b28", hi="#1f5aa6"),
+    # blueprint: deep blue paper, pale lines, cyan highlights, coral revisions
+    "dark": dict(paper="#0d2a4c", ink="#eaf3ff", ink2="#a7c1e2", line="#5b80ad", faint="#1a3b64", red="#ff9b73", hi="#6fd8ff"),
 }
 
 
@@ -80,12 +81,19 @@ class Sheet:
     def add(self, s):
         self.parts.append(s)
 
+    def t_at(self, y, extra=0.0):
+        """Plotter timing: the pen sweeps the sheet from top to bottom in about 1.8 s."""
+        return 0.15 + max(0, min(1, y / self.H)) * 1.8 + extra
+
+    def anim(self, kind, y, extra=0.0):
+        return f' class="{kind}" style="animation-delay:{self.t_at(y, extra):.2f}s"'
+
     def text(self, x, y, s, cls="b", size=16, color="ink", anchor=None, ls=None):
         for ch in s:
             self.used["m" if ch in MONO_ONLY and cls not in ("m", "mm") else cls].add(ch)
         a = f' text-anchor="{anchor}"' if anchor else ""
         l = f' letter-spacing="{ls}"' if ls else ""
-        self.add(f'<text class="{cls}" x="{x:.1f}" y="{y:.1f}" font-size="{size}" fill="{self.c[color]}"{a}{l}>{rich(s, cls)}</text>')
+        self.add(f'<text class="{cls} fd" style="animation-delay:{self.t_at(y, 0.35):.2f}s" x="{x:.1f}" y="{y:.1f}" font-size="{size}" fill="{self.c[color]}"{a}{l}>{rich(s, cls)}</text>')
 
     def para(self, x, y, s, cls, size, maxw, lh, color="ink2"):
         lines = wrap(s, cls, size, maxw)
@@ -94,18 +102,19 @@ class Sheet:
         return y + (len(lines) - 1) * lh
 
     def line(self, x1, y1, x2, y2, color="ink", w=1, dash=None):
-        d = f' stroke-dasharray="{dash}"' if dash else ""
-        self.add(f'<path d="M{x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}" stroke="{self.c[color]}" stroke-width="{w}"{d} fill="none"/>')
+        a = f' stroke-dasharray="{dash}"{self.anim("fd", min(y1, y2))}' if dash else f' pathLength="1"{self.anim("pl", min(y1, y2))}'
+        self.add(f'<path d="M{x1:.1f} {y1:.1f}L{x2:.1f} {y2:.1f}" stroke="{self.c[color]}" stroke-width="{w}"{a} fill="none"/>')
 
     def rect(self, x, y, w, h, stroke="ink", sw=1, fill="none"):
-        f = self.c[fill] if fill != "none" else "none"
-        self.add(f'<rect x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{f}" stroke="{self.c[stroke]}" stroke-width="{sw}"/>')
+        if fill != "none":
+            self.add(f'<rect{self.anim("fd", y)} x="{x:.1f}" y="{y:.1f}" width="{w:.1f}" height="{h:.1f}" fill="{self.c[fill]}"/>')
+        self.add(f'<path d="M{x:.1f} {y:.1f}h{w:.1f}v{h:.1f}h{-w:.1f}Z" pathLength="1"{self.anim("pl", y)} fill="none" stroke="{self.c[stroke]}" stroke-width="{sw}"/>')
 
     def arrow(self, x, y, direction, color="ink", size=9):
         s, h = size, size * 0.36
         pts = {"r": f"{x},{y} {x-s},{y-h} {x-s},{y+h}", "l": f"{x},{y} {x+s},{y-h} {x+s},{y+h}",
                "u": f"{x},{y} {x-h},{y+s} {x+h},{y+s}", "d": f"{x},{y} {x-h},{y-s} {x+h},{y-s}"}[direction]
-        self.add(f'<polygon points="{pts}" fill="{self.c[color]}"/>')
+        self.add(f'<polygon{self.anim("fd", y, 0.3)} points="{pts}" fill="{self.c[color]}"/>')
 
     def dim(self, x1, x2, y, label, ext_to=None, dash=None, open_end=False, color="ink"):
         """Horizontal dimension line with arrowheads, extension lines and a label above."""
@@ -120,7 +129,7 @@ class Sheet:
             self.text((x1 + x2) / 2, y - 7, label, "dm", 14.5, color, "middle", 0.6)
 
     def balloon(self, x, y, n, r=13):
-        self.add(f'<circle cx="{x}" cy="{y}" r="{r}" fill="none" stroke="{self.c["ink"]}" stroke-width="1"/>')
+        self.add(f'<circle{self.anim("fd", y, 0.2)} cx="{x}" cy="{y}" r="{r}" fill="none" stroke="{self.c["ink"]}" stroke-width="1"/>')
         self.text(x, y + 4.6, str(n), "mm", 13, "ink", "middle")
 
     def frame(self, cols, rows):
@@ -177,7 +186,13 @@ class Sheet:
                 data = base64.b64encode(buf.getvalue()).decode()
                 css.append(f"@font-face{{font-family:'{fam}';font-weight:{wt};src:url(data:font/woff2;base64,{data}) format('woff2')}}")
             css.append(f".{cls}{{font-family:'{fam}',{FALLBACK[fam]};font-weight:{wt}}}")
-        css.append("text{font-variant-numeric:tabular-nums}")
+        css.append("text{font-variant-numeric:tabular-nums}"
+                   ".pl{stroke-dasharray:1;animation:plot 1s cubic-bezier(.45,0,.25,1) both}"
+                   "@keyframes plot{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}"
+                   ".fd{animation:fade .6s ease-out both}@keyframes fade{from{opacity:0}}"
+                   ".grow{transform-box:fill-box;transform-origin:50% 100%;animation:grow .7s cubic-bezier(.2,.7,.2,1) both}"
+                   "@keyframes grow{from{transform:scaleY(0)}}"
+                   "@media (prefers-reduced-motion:reduce){*{animation:none!important}}")
         return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{self.W}" height="{self.H}" viewBox="0 0 {self.W} {self.H}" role="img" aria-label="{escape(label)}">\n'
                 f"<title>{escape(label)}</title>\n<style>{''.join(css)}</style>\n" + "\n".join(self.parts) + "\n</svg>\n")
 
@@ -196,11 +211,11 @@ def cloud(s, x, y, w, h, step=17):
     pts.append(pts[0])
     d = f"M{pts[0][0]:.1f} {pts[0][1]:.1f}" + "".join(
         f"A{step*0.62:.1f} {step*0.62:.1f} 0 0 1 {px:.1f} {py:.1f}" for px, py in pts[1:])
-    s.add(f'<path d="{d}" fill="none" stroke="{s.c["red"]}" stroke-width="1.4"/>')
+    s.add(f'<path d="{d}" pathLength="1" class="pl" style="animation-delay:2.3s;animation-duration:1.4s" fill="none" stroke="{s.c["red"]}" stroke-width="1.4"/>')
 
 
 def rev_triangle(s, x, y, n):
-    s.add(f'<polygon points="{x},{y-12} {x-11},{y+7} {x+11},{y+7}" fill="none" stroke="{s.c["red"]}" stroke-width="1.3"/>')
+    s.add(f'<polygon class="fd" style="animation-delay:3.2s" points="{x},{y-12} {x-11},{y+7} {x+11},{y+7}" fill="none" stroke="{s.c["red"]}" stroke-width="1.3"/>')
     s.text(x, y + 4, str(n), "mm", 11, "red", "middle")
 
 
@@ -235,9 +250,9 @@ def sheet_profile(theme):
         s.text(px(yr), y_axis + 22, str(yr), "m", 11.5, "ink2", "middle")
     s.dim(px(2019.6), px(2023.5), 432, "B.E. MECHANICAL, MESCOE PUNE", ext_to=y_axis)
     s.dim(px(2023.5), px(2025.25), 432, "PG-DAC, C-DAC", ext_to=y_axis, dash="4 3")
-    s.dim(px(2025.25), px(2025.83), 400, "", ext_to=y_axis)
-    s.text(px(2025.54), 393, "INTERN", "dm", 14.5, "ink", "middle", 0.6)
-    s.dim(px(2025.83), px(2026.84), 432, "DEVELOPER", ext_to=y_axis, open_end=True)
+    s.dim(px(2025.25), px(2025.83), 400, "", ext_to=y_axis, color="hi")
+    s.text(px(2025.54), 393, "INTERN", "dm", 14.5, "hi", "middle", 0.6)
+    s.dim(px(2025.83), px(2026.84), 432, "DEVELOPER", ext_to=y_axis, open_end=True, color="hi")
     s.line(px(2026.84), 440, px(2026.84), y_axis, "red", 1)
     s.text(px(2026.84) + 6, 452, "NOW", "mm", 10.5, "red")
 
@@ -259,7 +274,7 @@ def sheet_profile(theme):
         s.text(tx + 96, yy + 22.5, v, "b", 14.5, "ink")
         yy += 34
     s.line(tx + 84, ty + 44, tx + 84, yy, "ink", 1)
-    cells = [("SHEET", "1 OF 3"), ("REV.", "NOV 2026"), ("SCALE", "1 : 1")]
+    cells = [("SHEET", "1 OF 4"), ("REV.", "NOV 2026"), ("SCALE", "1 : 1")]
     cw = tw / 3
     for i, (k, v) in enumerate(cells):
         cx = tx + cw * i
@@ -312,7 +327,7 @@ def sheet_parts(theme):
     s.line(cols[0], y, cols[4], y, "ink", 1.4)
     for i, (measure, pl, nl, h) in enumerate(rows, 1):
         s.balloon((cols[0] + cols[1]) / 2, y + 30, i)
-        s.text(cols[1] + 14, y + 39, measure, "d", 30, "ink", ls=0.3)
+        s.text(cols[1] + 14, y + 39, measure, "d", 30, "hi", ls=0.3)
         for k, line in enumerate(pl):
             s.text(cols[2] + 14, y + 28 + 21 * k, line, "bm", 16.5, "ink")
         for k, line in enumerate(nl):
@@ -336,11 +351,11 @@ def sheet_parts(theme):
     for label, lo, hi, y0 in (("BEFORE", 2.7, 3.6, top + 62), ("AFTER", 1.7, 2.5, top + 120)):
         s.text(64, y0 + 5, label, "mm", 12, "ink", ls=1.2)
         s.line(X(0), y0, X(lo), y0, "ink", 1.6)
-        s.add(f'<rect x="{X(lo):.1f}" y="{y0-9}" width="{(hi-lo)*scale:.1f}" height="18" fill="url(#h{theme})" stroke="{s.c["ink"]}" stroke-width="1.2"/>')
+        s.add(f'<rect class="fd" style="animation-delay:{s.t_at(y0, 0.5):.2f}s" x="{X(lo):.1f}" y="{y0-9}" width="{(hi-lo)*scale:.1f}" height="18" fill="url(#h{theme})" stroke="{s.c["ink"]}" stroke-width="1.2"/>')
         s.dim(X(lo), X(hi), y0 - 22, f"{lo}–{hi} s".replace(".", "."))
         s.line(X(lo), y0 - 28, X(lo), y0 - 10, "line", 0.7)
         s.line(X(hi), y0 - 28, X(hi), y0 - 10, "line", 0.7)
-    s.strip("PARTS LIST, INTELLIGENTDX", "2 OF 3")
+    s.strip("PARTS LIST, INTELLIGENTDX", "2 OF 4")
     return s.svg("Parts list of what Vaibhav built at IntelligentDX")
 
 
@@ -396,14 +411,14 @@ def sheet_voting(theme):
         ya, yb = by + rh * 3 + 16, by + rh * 2 + 16
         mid = (xa + xb) / 2
         broken = i == 2
-        col = "red" if broken else "ink"
-        s.add(f'<path d="M{xa} {ya}H{mid}V{yb}H{xb - 9}" fill="none" stroke="{s.c[col]}" stroke-width="1.2"'
+        col = "red" if broken else "hi"
+        s.add(f'<path d="M{xa} {ya}H{mid}V{yb}H{xb - 9}" fill="none" class="{"fd" if broken else "pl"}" pathLength="1" style="animation-delay:{1.0 + i*0.35 + (2.4 if broken else 0):.2f}s" stroke="{s.c[col]}" stroke-width="1.2"'
               f'{" stroke-dasharray=\"4 3\"" if broken else ""}/>')
         s.arrow(xb, yb, "r", col)
         if broken:
             cx, cy = mid, (ya + yb) / 2
-            s.add(f'<circle cx="{cx}" cy="{cy}" r="9" fill="{s.c["paper"]}" stroke="{s.c["red"]}" stroke-width="1.3"/>'
-                  f'<path d="M{cx-4} {cy-4}l8 8M{cx+4} {cy-4}l-8 8" stroke="{s.c["red"]}" stroke-width="1.5"/>')
+            s.add(f'<g class="fd" style="animation-delay:3.4s"><circle cx="{cx}" cy="{cy}" r="9" fill="{s.c["paper"]}" stroke="{s.c["red"]}" stroke-width="1.3"/>'
+                  f'<path d="M{cx-4} {cy-4}l8 8M{cx+4} {cy-4}l-8 8" stroke="{s.c["red"]}" stroke-width="1.5"/></g>')
     cloud(s, xs[2] - 14, by - 14, bw + 28, rh * 4 + 28)
     rev_triangle(s, xs[2] + bw + 4, by - 26, 1)
 
@@ -432,7 +447,7 @@ def sheet_voting(theme):
     for i, note in enumerate(NOTES, 1):
         s.text(64, y, f"{i}.", "m", 13.5, "ink2")
         y = s.para(88, y, note, "b", 15.5, 760, 22) + 30
-    s.strip("VOTING SYSTEM", "3 OF 3")
+    s.strip("VOTING SYSTEM", "3 OF 4")
     return s.svg("Blockchain-Inspired Voting System: hash chain detail, services and notes")
 
 

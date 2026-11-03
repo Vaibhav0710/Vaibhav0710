@@ -1,7 +1,7 @@
 name: Generate profile graphics
 
 on:
-  schedule: # execute every 12 hours
+  schedule: # every 12 hours
     - cron: "0 */12 * * *"
   workflow_dispatch:
   push:
@@ -15,25 +15,21 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      
-      - uses: Platane/snk/svg-only@v3
-        id: snake-gif
-        with:
-          github_user_name: ${{ github.repository_owner }}
-          outputs: |
-            dist/github-snake.svg
-            dist/github-snake-dark.svg?palette=github-dark
 
-      # 3D contribution calendar with totals and languages; writes ./profile-3d-contrib/*.svg
-      - uses: yoshi389111/github-profile-3d-contrib@v0.9.3
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install font tools
+        run: pip install fonttools brotli
+
+      # Sheet 4 of the profile README, drawn from live contribution data
+      - name: Draw the activity log
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: ${{ github.repository_owner }}
+        run: python3 scripts/build_activity.py --user ${{ github.repository_owner }} --out dist
 
-      # The publish step below replaces the whole output branch, so every image must be in dist/
-      - name: Collect 3D images
-        run: cp profile-3d-contrib/*.svg dist/
-
+      # Replaces the whole output branch, so every image must be in dist/
       - name: Push to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
