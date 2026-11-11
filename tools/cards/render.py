@@ -5,7 +5,7 @@ from xml.sax.saxutils import escape, quoteattr
 
 from tools.cards.content import Heading, Hero, Project, Tile
 from tools.cards.fonts import FontKit
-from tools.cards.halftone import Dot
+from tools.cards.portrait import Stroke
 
 PAPER = "#F6F4EE"
 INK = "#121212"
@@ -27,13 +27,13 @@ FAMILIES = (
 
 HERO_W, HERO_H, HERO_RADIUS = 1200, 560, 20
 HERO_PAD = 64
-PANEL_X, PANEL_Y, PANEL_W, PANEL_H = 740, 20, 440, 520  # the portrait panel; dots use its size
-TEXT_RIGHT = PANEL_X - 48
+PORTRAIT_X, PORTRAIT_Y, PORTRAIT_W, PORTRAIT_H = 740, 20, 440, 520  # area the engraving is drawn in
+TEXT_RIGHT = PORTRAIT_X - 48
 KICKER_SIZE, KICKER_SPACING = 15, 2
 NAME_SIZE = 136
 TAGLINE_SIZE, TAGLINE_LINE, TAGLINE_Y = 24, 34, 430
 SWEEP_START, SWEEP_STEP = 1.2, 0.22  # seconds before the blue sweep, and between letters
-DOTS_BAND, DOTS_START, DOTS_STEP = 40, 0.2, 0.07  # portrait fades in by 40px bands
+PORTRAIT_BAND, PORTRAIT_START, PORTRAIT_STEP = 40, 0.2, 0.07  # portrait fades in by 40px bands
 HERO_MOTION = (
     f".l{{animation:sweep 5.4s ease-out infinite}}"
     f"@keyframes sweep{{0%{{fill:{BLUE}}}16%{{fill:{INK}}}100%{{fill:{INK}}}}}"
@@ -56,7 +56,7 @@ class LayoutError(ValueError):
     """Text does not fit the space its card gives it."""
 
 
-def hero_svg(hero: Hero, dots: list[Dot], kit: FontKit) -> str:
+def hero_svg(hero: Hero, strokes: list[Stroke], kit: FontKit) -> str:
     card, width = "hero", TEXT_RIGHT - HERO_PAD
     tagline = _lines(kit, card, "sans", hero.tagline, TAGLINE_SIZE, width, max_lines=2)
     _fit(kit, card, "serif", hero.first, NAME_SIZE, width)
@@ -65,7 +65,7 @@ def hero_svg(hero: Hero, dots: list[Dot], kit: FontKit) -> str:
     _fit(kit, card, "mono", hero.link, 16, width)
     fonts = {"serif": hero.first, "serif-italic": hero.last,
              "mono": hero.kicker + hero.link, "sans": hero.tagline}
-    body = _frame(HERO_W, HERO_H, HERO_RADIUS, PAPER) + _hero_text(hero, tagline) + _portrait(dots)
+    body = _frame(HERO_W, HERO_H, HERO_RADIUS, PAPER) + _hero_text(hero, tagline) + _portrait(strokes)
     label = f"{hero.first} {hero.last}: {hero.tagline}"
     return _svg(HERO_W, HERO_H, label, kit.css(fonts) + HERO_MOTION, body)
 
@@ -148,22 +148,22 @@ def _hero_text(hero: Hero, tagline: list[str]) -> str:
     )
 
 
-def _portrait(dots: list[Dot]) -> str:
-    """Dots as zero-length round-capped strokes, grouped by fade-in band and by radius."""
+def _portrait(strokes: list[Stroke]) -> str:
+    """Engraving lines in ink, grouped by fade-in band and by line width."""
     bands: dict[int, dict[float, list[str]]] = defaultdict(lambda: defaultdict(list))
-    for dot in dots:
-        bands[int(dot.y // DOTS_BAND)][round(dot.r * 4) / 4].append(f"M{dot.x:g} {dot.y:g}h0")
+    for stroke in strokes:
+        segment = f"M{stroke.x:g} {stroke.y:g}h{stroke.length:g}"
+        bands[int(stroke.y // PORTRAIT_BAND)][stroke.width].append(segment)
     groups = "".join(
-        f'<g class="b" style="animation-delay:{DOTS_START + band * DOTS_STEP:.2f}s">'
-        + "".join(f'<path stroke-width="{2 * r:g}" d="{"".join(segments)}"/>'
-                  for r, segments in sorted(bands[band].items()))
+        f'<g class="b" style="animation-delay:{PORTRAIT_START + band * PORTRAIT_STEP:.2f}s">'
+        + "".join(f'<path stroke-width="{width:g}" d="{"".join(segments)}"/>'
+                  for width, segments in sorted(bands[band].items()))
         + "</g>"
         for band in sorted(bands)
     )
     return (
-        f'<rect x="{PANEL_X}" y="{PANEL_Y}" width="{PANEL_W}" height="{PANEL_H}" rx="{CARD_RADIUS}" fill="{INK}"/>'
-        f'<g transform="translate({PANEL_X} {PANEL_Y})" fill="none" stroke="{PAPER}" '
-        f'stroke-linecap="round">{groups}</g>'
+        f'<g transform="translate({PORTRAIT_X} {PORTRAIT_Y})" fill="none" stroke="{INK}" '
+        f'stroke-linecap="butt">{groups}</g>'
     )
 
 

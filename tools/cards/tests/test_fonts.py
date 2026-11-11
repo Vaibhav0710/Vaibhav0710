@@ -1,6 +1,10 @@
+import base64
+import io
+import re
 from pathlib import Path
 
 import pytest
+from fontTools.ttLib import TTFont
 
 from tools.cards.fonts import FONTS, FontKit, MissingGlyphError, font_face_css, load_font
 
@@ -60,3 +64,12 @@ def test_load_font_rejects_wrong_hash(tmp_path):
 
     with pytest.raises(ValueError, match="sha256"):
         load_font(spec, tmp_path)
+
+
+def test_embedded_font_keeps_the_source_timestamp_so_builds_repeat():
+    spec = FONTS["serif"]
+    css = css_for("serif", "Vaibhav")
+    data = base64.b64decode(re.search(r"base64,([^)]+)\)", css).group(1))
+
+    embedded = TTFont(io.BytesIO(data))["head"].modified
+    assert embedded == TTFont(load_font(spec, FONTS_DIR))["head"].modified

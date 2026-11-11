@@ -3,7 +3,7 @@ from pathlib import Path
 import pytest
 
 from tools.cards.build import build_cards, main
-from tools.cards.halftone import Dot, save_dots
+from tools.cards.portrait import Stroke, save_strokes
 
 FONTS_DIR = Path(__file__).resolve().parents[1] / ".fonts"
 EXPECTED = {
@@ -16,7 +16,7 @@ EXPECTED = {
 
 def test_build_cards_writes_all_nine_files(tmp_path):
     portrait = tmp_path / "portrait.json"
-    save_dots([Dot(10.5, 10.5, 2.0)], portrait)
+    save_strokes([Stroke(10.0, 10.5, 8.0, 2.0)], portrait)
 
     written = build_cards(tmp_path / "cards", portrait, FONTS_DIR)
 

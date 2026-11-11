@@ -80,7 +80,7 @@ def load_font(spec: FontSpec, cache_dir: Path) -> Path:
 
 def font_face_css(spec: FontSpec, font_path: Path, text: str) -> str:
     """Returns an @font-face rule holding only the glyphs needed to draw `text`."""
-    font = TTFont(io.BytesIO(_static_font_bytes(font_path, spec.weight)))
+    font = TTFont(io.BytesIO(_static_font_bytes(font_path, spec.weight)), recalcTimestamp=False)
     _require_glyphs(spec, font, text)
     options = subset.Options()
     options.flavor = "woff2"
@@ -151,7 +151,7 @@ def _require_in_cmap(spec: FontSpec, cmap: dict[int, str], text: str) -> None:
 @functools.lru_cache(maxsize=None)
 def _static_font_bytes(font_path: Path, weight: int) -> bytes:
     """Pinning a variable font is slow, so each (file, weight) is done once per run."""
-    font = TTFont(font_path)
+    font = TTFont(font_path, recalcTimestamp=False)  # keep builds byte-for-byte repeatable
     if "fvar" in font:
         font = _pin_axes(font, weight)
     buffer = io.BytesIO()

@@ -24,11 +24,13 @@ tools/cards/.venv/Scripts/python -m tools.cards.build cards
 To redraw the portrait from a new photo (the photo itself never goes into the repo):
 
 ```bash
-tools/cards/.venv/Scripts/python -m tools.cards.build portrait path/to/photo.jpg --crop 60,15,370,380
+tools/cards/.venv/Scripts/python -m tools.cards.build portrait path/to/photo.jpg
 ```
 
-`--crop` is `x0,y0,x1,y1` in photo pixels; leave it out to use the whole photo.
-The portrait looks best from a head-and-shoulders photo on a dark background.
+The portrait is an engraving: horizontal ink lines that thicken where the photo is dark.
+It needs a head-and-shoulders photo against a plain light wall (the wall is lifted to white,
+so only you are drawn); a dark background is rejected. Add `--crop x0,y0,x1,y1` (photo pixels)
+to use part of the photo.
 
 ## Test
 

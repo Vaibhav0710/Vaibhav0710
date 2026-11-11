@@ -6,7 +6,7 @@ import pytest
 
 from tools.cards.content import HEADING, HERO, PROJECTS, TILES
 from tools.cards.fonts import FontKit
-from tools.cards.halftone import Dot
+from tools.cards.portrait import Stroke
 from tools.cards.render import (
     LayoutError,
     heading_svg,
@@ -17,13 +17,13 @@ from tools.cards.render import (
 )
 
 KIT = FontKit(Path(__file__).resolve().parents[1] / ".fonts")
-DOTS = [Dot(x + 2.5, y + 2.5, 1.0 + (x % 3) * 0.5) for x in range(0, 440, 5) for y in range(0, 520, 5)]
+STROKES = [Stroke(x, y + 2.0, 6.0, 0.5 + (x % 3) * 0.75) for x in range(0, 440, 8) for y in range(0, 520, 4)]
 SVG_NAMESPACE = 'xmlns="http://www.w3.org/2000/svg"'
 
 
 def all_cards() -> list[str]:
     return [
-        hero_svg(HERO, DOTS, KIT),
+        hero_svg(HERO, STROKES, KIT),
         *(tile_svg(tile, KIT) for tile in TILES),
         *(project_svg(project, KIT) for project in PROJECTS),
         heading_svg(HEADING, "dark", KIT),
@@ -73,7 +73,7 @@ def test_hero_shows_copy_and_portrait(cards):
     assert "Jain" in text.replace("\n", "")
     assert "vaibhavjain-portfolio.vercel.app ↗" in text
     paths = ET.fromstring(cards[0]).iter("{http://www.w3.org/2000/svg}path")
-    assert sum(path.get("d").count("M") for path in paths) == len(DOTS)
+    assert sum(path.get("d").count("M") for path in paths) == len(STROKES)
 
 
 def test_ampersand_and_angle_brackets_are_escaped():

@@ -13,28 +13,29 @@ from pathlib import Path
 
 from tools.cards.content import HEADING, HERO, PROJECTS, TILES
 from tools.cards.fonts import FontKit
-from tools.cards.halftone import CropBox, halftone, load_dots, save_dots
-from tools.cards.render import PANEL_H, PANEL_W, heading_svg, hero_svg, project_svg, tile_svg
+from tools.cards.portrait import CropBox, engrave, load_strokes, save_strokes
+from tools.cards.render import PORTRAIT_H, PORTRAIT_W, heading_svg, hero_svg, project_svg, tile_svg
 
 TOOL_DIR = Path(__file__).resolve().parent
 FONTS_DIR = TOOL_DIR / ".fonts"
 PORTRAIT = TOOL_DIR / "data" / "portrait.json"
 CARDS_DIR = TOOL_DIR.parents[1] / "assets" / "cards"
-PORTRAIT_CELL = 6
+PORTRAIT_PITCH = 4  # px between engraving lines
+PORTRAIT_STEP = 2  # px between samples along a line
 
 
 def build_portrait(photo: Path, crop: CropBox | None, out: Path = PORTRAIT) -> int:
-    dots = halftone(photo, PANEL_W, PANEL_H, PORTRAIT_CELL, crop)
-    save_dots(dots, out)
-    return len(dots)
+    strokes = engrave(photo, PORTRAIT_W, PORTRAIT_H, PORTRAIT_PITCH, PORTRAIT_STEP, crop)
+    save_strokes(strokes, out)
+    return len(strokes)
 
 
 def build_cards(out_dir: Path = CARDS_DIR, portrait: Path = PORTRAIT,
                 fonts_dir: Path = FONTS_DIR) -> list[Path]:
     kit = FontKit(fonts_dir)
-    dots = load_dots(portrait)
+    strokes = load_strokes(portrait)
     cards = {
-        "hero.svg": hero_svg(HERO, dots, kit),
+        "hero.svg": hero_svg(HERO, strokes, kit),
         **{f"tile-{tile.slug}.svg": tile_svg(tile, kit) for tile in TILES},
         **{f"project-{project.slug}.svg": project_svg(project, kit) for project in PROJECTS},
         **{f"heading-{HEADING.slug}-{theme}.svg": heading_svg(HEADING, theme, kit)
@@ -54,7 +55,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         if args.command == "portrait":
             count = build_portrait(args.photo, args.crop, args.out)
-            print(f"{count} dots written to {args.out}")
+            print(f"{count} strokes written to {args.out}")
         else:
             for path in build_cards(args.out, args.portrait):
                 print(f"{path.stat().st_size // 1024:>4} KB  {path.name}")
@@ -67,7 +68,7 @@ def main(argv: list[str] | None = None) -> int:
 def _parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python -m tools.cards.build")
     commands = parser.add_subparsers(dest="command", required=True)
-    portrait = commands.add_parser("portrait", help="turn a photo into portrait dots")
+    portrait = commands.add_parser("portrait", help="turn a photo into the engraved portrait")
     portrait.add_argument("photo", type=Path)
     portrait.add_argument("--crop", type=_crop_box, help="x0,y0,x1,y1 in photo pixels")
     portrait.add_argument("--out", type=Path, default=PORTRAIT)
