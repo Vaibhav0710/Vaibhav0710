@@ -229,7 +229,7 @@ Final-year B.E. project: an IoT robot that monitors crop and soil health and det
 <sub>LeetCode and TUF+ solutions sync automatically through LeetHub and TUFHub.</sub>
 
 **📜 Certifications**<br/>
-<sub>Java Full Stack LIVE Course (Spark 2.0) · Alpha: DSA with Java (Apna College) · Google Cloud Bootcamp (GeeksforGeeks) · LeetCode 100 Days Badge 2024</sub>
+<sub>Java Full Stack LIVE Course (Spark 2.0) · Google Cloud Bootcamp (GeeksforGeeks) · LeetCode 100 Days Badge 2024</sub>
 
 </div>
 
