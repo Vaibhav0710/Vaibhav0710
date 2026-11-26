@@ -144,7 +144,7 @@ The Courier Management System is a full-stack platform: Java 21, Spring Boot 3.4
 - **At work:** Python (Flask), Node.js (Express), C#/.NET, PostgreSQL, Redis, BigQuery, Google Cloud.
 - **In projects and training:** Java, Spring Boot, Spring Cloud, Kafka, Resilience4j, Docker, Kubernetes, Prometheus, Grafana.
 - **Problem-solving:** [LeetCode solutions](https://github.com/Vaibhav0710/Leetcode-solution) · [90-day DSA plan](https://github.com/Vaibhav0710/Daily_DSA) · [CS50x](https://github.com/Vaibhav0710/CS50X) · [CS50P](https://github.com/Vaibhav0710/CS50P). LeetCode and TUF+ solutions sync automatically through LeetHub and TUFHub.
-- **Certifications:** Java Full Stack LIVE Course (Spark 2.0) · Alpha: DSA with Java (Apna College) · Google Cloud Bootcamp (GeeksforGeeks) · LeetCode 100 Days Badge 2024.
+- **Certifications:** Java Full Stack LIVE Course (Spark 2.0) · Google Cloud Bootcamp (GeeksforGeeks) · LeetCode 100 Days Badge 2024.
 
 </details>
 
