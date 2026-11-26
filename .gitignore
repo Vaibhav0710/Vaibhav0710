@@ -1,0 +1,4 @@
+tools/cards/.venv/
+tools/cards/.fonts/
+__pycache__/
+.pytest_cache/
